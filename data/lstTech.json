@@ -1,0 +1,22 @@
+{
+   "technicien": [
+
+      {
+         "nom": "Abdelkader Bekhouche",
+         "bureau": ["815 Rue Bel Air"],
+         "sites": ["525 rue Dominion", "1055 rue D'Hibernia 1212, Drummond (Caserne 25)", "1255 rue de la sucrerie (Caserne 15)", "1445 rue St-Mathieu (Caserne 10)", "1990 rue de Maricourt (ÉcoCartier)", "2450 rue Workman est", "530 rue Vinet", "256 rue Young", "3177 St-Jacques ouest", "333, Peel", "3552, St-Patrick", "5380, Eadie", "3552 St-Patrick", "523, Place St-Henri", "5485, Chemin Côte-St-Paul", "5925 Avenue De Montmagny", "6000 Notre-Dame Ouest", "6039, boulevard Monk", "6052, boulevard Monk", "6071, Laurendeau", "6045, Monk", "6219, Monk", "6225 boul. Monk"]
+      },
+
+      {
+         "nom": "Daniel Touchette",
+         "bureau": ["6150 Avenue Royalmount"],
+         "sites": ["10,chemin Sunnydale DDO (Caserne 61)", "10, Rosevelt, Mont-Royal (Caserne 74)", "1035, Rachel Est", "1196 Camillien-Houde", "1405 rue de l'Église (Point de Cour de St-Laurent)", "15-19 Stanton Westmount (Caserne 76)", "1800, Remembrance (PJEVSL)", "6150 Royalmount SSIM", "200 Bellechasse SSIM", "300 Bellechasse", "20099 Gouin O", "163 Ch. du Cap-St-Jacques", "183 Ch. du Cap-St-Jacques", "190, Ch. du Cap-St-Jacques", "205, Ch. du Cap-St-Jacques", "2115 Chemin du Bord-du-Lac", "230, Chevremont, Ile Bizard", "310, Beaurepaire drive, Beaconsfield (Caserne 53)", "3048, boul. St-Charles, Kirkland (Caserne 54)", "3535 Sartelon, St-Laurent (Écocentre)", "40, avenue St-Just, Outremont (Caserne 75)", "4040, ave du Parc (Quartier Général)", "4180 Côte-des-Neiges", "5353, Gatineau (Caserne 27)", "5500, Bois-Franc, St-Laurent (Caserne 71)", "9432, Boul. Gouin ouest (Parc Bois de Liesse)"]
+
+      {
+         "nom": "Yves Turcotte",
+         "bureau": ["800 Boulevard de Maisonneuve Est"],
+         "sites": ["1240 St-Marc", "1550 Dufresne", "1696 Montcalm", "1700 Amherst (Centre Ste-Catherine d'Alexandrie)", "2040 Alexandre-de-Sève (Centre Alexandre-de-Sève)", "2550 rue Ontario Est, Montréal", "2633 Ontario (Jean-Claude Malépart)", "276 rue St-Jacques", "465 St-Jean", "395, boulevard de Maisonneuve Ouest"]
+      }
+
+   ]
+}
