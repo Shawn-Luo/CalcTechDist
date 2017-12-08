@@ -1,4 +1,4 @@
-let file = "./data/techList.txt";
+let file = "./data/nameList.txt";
 let listTech = [];
 let tech = {
 	name: '', 

@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator::Tech Distance</title>
+    <style rel="stylesheet" href="styles.css" ></style>
 </head>
 <body>
-
+<div class='container'>
+    <header><h1>Calculator::Tech Distance</h1></header>
+    <p>1. Entrer le nom de Technicien</p>
+    <p class='indent'>-> L'application affiche son adresse de burreau et ses adresses servis</p>
+    <p>2. Remplir les points de départ et déstination par déplacer les adresses</p>
+    <p class='indent'>-> L'application affiche les distances plus courtes</p>
+    <div class='site'>
+        <br>
+        <form onchange="">
+            Technicien: <input type="text" name="techn" placeholder="Louis Cyr">
+            <button type="submit" >Confirmer</button>
+        </form>
+        <p>Sites servis:</p>
+        <ul style="list-style: circle; padding-left:1.2em; ">
+            <li>1550 rue Metcalf</li>
+            <li>1555 rue Peel</li>
+            <li>3711 rue St-Antoine ouest</li>
+            <li>1002, Sherbrooke ouest</li>
+        </ul>
+    </div>
+    <div class='frame'>
+        <table>
+            <thead>
+            <tr>
+                <th>Départ</th><th>Destination</th><th>Distance(km)</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <p style="text-align: center;"><strong><span style="color: #366691; font-size: 20px; text-shadow: 4px 10px 4px #888;">Calculatrice::Tech Distance par Shawn Luo</span></strong></p>
+</div>
 </body>
 </html>
