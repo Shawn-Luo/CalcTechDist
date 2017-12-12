@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator::Tech Distance - Accueil</title>
+    <link type="text/css" rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Calculatrice::Tech Distance </h1>
+<div id="intro">
+    <p>1. Cliquer le nom du technicien</p>
+    <p style="margin-left:2em;">-> L'application affiche son adresse de burreau et ses adresses servis</p>
+    <p>2. Remplir les points de départ et déstination par déplacer les adresses</p>
+    <p style="margin-left:2em;">-> L'application affiche les distances plus courtes</p>
+</div>
+
+<span><button id="homeBtn">Home</button></span>
+<span><button id="helpBtn">Aide</button></span>
+<!--INDEX LIST-->
+<ul id="nameList"></ul>
+
+<div id="calculator" style="display: none">
+    <div id="sitesDiv">
+        <br>
+        <p><strong>Bureau:</strong></p>
+        <ul id="office"></ul>
+        <p><strong>Sites:</strong></p>
+        <ul id="sites"></ul>
+    </div>
+    <div id="formDiv">
+        <h4>Technicien: <span id="technician"></span></h4>
+        <FORM>
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <th></th>
+                    <th>Départ</th>
+                    <th>Destination</th>
+                    <th>Distance</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td>1999.00</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button id="calculer" style="background-color:forestgreen">Calculer</button>
+                    </td>
+                    <td>
+                        <button id="reset" style="background-color:orangered">Recommencer</button>
+                    </td>
+                    <td><em>Total:<em id="sum"></em></em></td>
+
+                </tr>
+            </table>
+            <br>
+
+
+        </FORM>
+    </div>
+
+</div>
+
+<footer>Auteur: Xiaohui Luo<br>Copyright &copy; Ville de Montréal 2017</footer>
+<script src="scripts/data.js"></script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="scripts/application.js"></script>
+</body>
+</html>
