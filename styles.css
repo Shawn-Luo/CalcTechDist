@@ -15,8 +15,8 @@ ul li {
     font-family: Georgia;
     font-size: 12px;
     background-color: #c0dbf1;
-    border: 1px solid cornsilk;
-    padding: 5px;
+    border: 2px solid cornsilk;
+    padding: 2px;
 }
 
 button {
@@ -62,17 +62,12 @@ button {
 footer {
     padding: 0.4em;
     color: white;
-    background-color: #232323;
+    background: linear-gradient(to left, #232526, #414345);
     clear: left;
     text-align: center;
 }
 
-/*nav {*/
-/*float: left;*/
-/*max-width: 160px;*/
-/*margin: 0;*/
-/*padding: 1em;*/
-/*}*/
+.sum {font: bold 20px "new century schoolbook", serif; color: Chocolate; margin: 0 30px 0 30px; }
 
 /*nav ul {*/
 /*list-style-type: none;*/

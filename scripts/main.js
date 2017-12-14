@@ -1,33 +1,35 @@
-
 /* *
 * DOM objects
 * Three colons for display the list of all technicians' names
 * */
 
-// sort data by name
+// sort data by names
 const data = jsonData.sort(function(a,b) {
     return a.name.localeCompare(b.name);
 });
 
+// array to save origin and destination addresses
+
 // DOM objects
 let homeBtn = document.getElementById('homeBtn');
 let helpBtn = document.getElementById('helpBtn');
-let calcBtn = document.getElementById('calculer');
-let resetBtn = document.getElementById('reset');
+
 let nameList = document.getElementById('nameList');
 let intro = document.getElementById('intro');
 let calculator = document.getElementById('calculator');
-// let addDiv = document.getElementById('addDiv');
-// let formDiv = document.getElementById('formDiv');
+let table = document.querySelector('table');
+let total = document.getElementById('total');
 let office = document.getElementById('office');
 let sites = document.getElementById('sites');
 let technician = document.getElementById('technician');
 
+// to show technicians list
 function renderIndex() {
     for(let i=0, len=data.length; i<len; i++) {
         updateIndex(data[i].name);
     }
 }
+
 
 function updateIndex(name) {
     let node = document.createElement("li");
@@ -40,16 +42,12 @@ function renderCalc(name) {
     intro.style.display = "none";
     calculator.style.display = "block";
     let techData = data.filter(tech => tech.name === name);
-    // console.log(techData);
-    // console.log(techData[0].sites);
     renderUL(office, techData[0].bureau);
     renderUL(sites, techData[0].sites);
     makeDragDrop();
+    document.getElementById('calculate').addEventListener('click', calculer());
 }
 
-// function renderAdd(name) {
-//     console.log(techData);
-// }
 
 function renderUL(objDOM, data) {
     while (objDOM.hasChildNodes()) {
@@ -61,44 +59,49 @@ function renderUL(objDOM, data) {
         node.textContent = data[i];
         objDOM.appendChild(node);
     }
-    makeDragDrop();
 }
 
 function makeDragDrop() {
     $('li').draggable({
-        helper: "clone",
-        revert: "invalid"
-    }).click(function() {
-        var b = parseInt($(this).width());
-        $(this).css('width', b + 5);
-    });
-    $('td input').droppable({
-        accept: "li",
-        drop: function(e, u) {
-            var a = u.helper.clone();
-            console.log("INFO: Accepted: ", a.attr("class"));
-            a.css("z-index", 1000);
-            a.appendTo("#drop");
-            a.attr('class', 'dropped').draggable({
-                containment: "#drop"
-            }).dblclick(function() {
-                // Enabled Resize on element when double clicked
-                $(this).resizable();
-            });
-        }
-    });
-    $(document).click(function() {
-        if ($(".dropped").length) {
-            // Disabled Resize on all elements when #drop
-            $(".ui-resizable").resizable("destroy");
+        helper: "clone", revert: "invalid",
+        start: function (e, ui) {
+            ui.helper.animate({width:"15%"},200);
+        },
+        cursorAt: {left:40, top:25}
+     });
+    $('td').droppable({
+        drop: function(e, ui) {
+            $(this).find("input").val( $(ui.draggable).text() );
         }
     });
 }
 
-function calculer() {}
+//to retrieve table data & save to array
+function getAdds(){
+    // let org=[]
+    // let dst=[]
+    //     let origin, dest;
 
-function resetForm() {
-    
+    // console.log(table.length);
+    let len = table.rows.length;
+    for(let i=1; i<len-1; i++) {
+        org = table.rows[i].cells[1].children[0].value;
+        dst = table.rows[i].cells[2].children[0].value;
+        if(org && dst) {        console.log(org);console.log(dst);}
+        // if(origin && dest){ org.push(origin); dst.push(dest) };
+        // console.log(table.row[i].cells[]);
+    }
+
+}
+
+
+function calculer() {
+
+    //colect table input and save to from[], to[]
+    getAdds();
+    //send request to google api
+    //handle response and show data at page
+    // calculate & show total
 }
 
 window.onload = renderIndex();
@@ -119,8 +122,6 @@ homeBtn.addEventListener('click', function() {
     nameList.style.display = "block";
 });
 
-helpBtn.addEventListener('click', function() {});
+helpBtn.addEventListener('click', () =>{alert('Function TO DO')});
 
-calcBtn.addEventListener('click', calculer());
-
-resetBtn.addEventListener('click', resetForm());
+document.getElementById('reset').addEventListener('click', function() {total.textContent = ''});
