@@ -10,14 +10,21 @@ ul li {
     display: inline-block;
     /*min-width: 220px;*/
     margin: 4px 4px;
-    /*margin-left: 5px;*/
-    /*margin-right: 4px;*/
     font-family: Georgia;
     font-size: 12px;
     background-color: #c0dbf1;
     border: 2px solid cornsilk;
     padding: 2px;
 }
+
+ul li #addNotFound {
+    background-color: firebrick;
+    color: white;
+    border: 2px solid orange;
+    padding: 2px;
+}
+
+.invalid { border: 3px solid red; }
 
 button {
     color: white;
@@ -69,21 +76,7 @@ footer {
 
 .sum {font: bold 20px "new century schoolbook", serif; color: Chocolate; margin: 0 30px 0 30px; }
 
-/*nav ul {*/
-/*list-style-type: none;*/
-/*padding: 0;*/
-/*}*/
 
-/*nav ul a {*/
-/*text-decoration: none;*/
-/*}*/
-
-/*content {*/
-/*margin-left: 170px;*/
-/*border-left: 1px solid gray;*/
-/*padding: 1em;*/
-/*overflow: hidden;*/
-/*}*/
 
 /*.indent {margin-left:4em;}*/
 /*.container {text-align: left; width: 800px; height: 500px; border: 1px solid black; float: right;}*/

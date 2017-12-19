@@ -13,6 +13,7 @@ const data = jsonData.sort(function (a, b) {
 // let dstArray = [];
 const KEY = "&key=AIzaSyDwwjtjmR9oVWDe0JCkWb34RuZD2lvdMHs";
 const URL = "https://maps.googleapis.com/maps/api/distancematrix/json?";
+const addNotFound = [];
 
 // DOM objects
 const homeBtn = document.getElementById('homeBtn');
@@ -26,18 +27,19 @@ const total = document.getElementById('total');
 const office = document.getElementById('office');
 const sites = document.getElementById('sites');
 const technician = document.getElementById('technician');
+const wrongAdd = document.getElementById('wrongAdd');
 
 // to show technicians list
 function renderIndex() {
     for (let i = 0, len = data.length; i < len; i++) {
-        updateIndex(data[i].name);
+        updateIndex(nameList, data[i].name);
     }
 }
 
-function updateIndex(name) {
+function updateIndex(listObj, name) {
     let node = document.createElement("li");
     node.textContent = name;
-    nameList.appendChild(node);
+    listObj.appendChild(node);
 }
 
 function renderCalc(name) {
@@ -77,16 +79,37 @@ function renderUL(objDOM, data) {
     }
 }
 
+function addValid(add) {
+    if(addNotFound.includes(add)) {
+        updateIndex(wrongAdd, add);
+        return false;
+    }
+    return true;
+}
+
+function markAddErr(add) {
+    for(let i=0, len=allList.length; i<len; i++) {
+        if(allList[i].textContent === add ) {
+
+            console.log('list need to change');
+            //allList[i].style.border = "3px solid red";
+        }
+    }
+}
+
 //to retrieve table data & save to array
-function getAdds() {
+function getAdds(rows) {
     let orgArray = [], dstArray = [];
     let len = table.rows.length;
     for (let i = 1; i < len - 1; i++) {
         org = table.rows[i].cells[1].children[0].value;
         dst = table.rows[i].cells[2].children[0].value;
+
         if (org && dst) {
+            if(!addValid(org) || !addValid(dst)) { continue; }
             orgArray.push(org);
             dstArray.push(dst);
+            rows.push(i);
         }
     }
     return {
@@ -95,9 +118,8 @@ function getAdds() {
     };
 }
 
-function getDistance(origin,destination, distance) {
+function getDistance(origin, destination, distance) {
     let service = new google.maps.DistanceMatrixService();
-    let dist = null;
     service.getDistanceMatrix(
         {
             origins: [origin],
@@ -107,36 +129,45 @@ function getDistance(origin,destination, distance) {
             avoidTolls: false
         }, function (response, status) {
             if (status == google.maps.DistanceMatrixStatus.OK) {
+                //let dist = response.rows[0].elements[0].distance.text;
 
-                console.log(JSON.stringify(response));
-                console.log(response.rows[0].elements[0].distance.text);
-                dist = response.rows[0].elements[0].distance.text;
+                distance = 0;
+                let stat = response.rows[0].elements[0].status;
 
-                // //console.log(rslt);
-                // return dst.substr(0,dst.indexOf(' '));
+                if(stat === 'NOT_FOUND') {
+                    let o = response.originAddresses[0];
+                    let d = response.destinationAddresses[0]
+                    if(!o) {addNotFound.push(o); };
+                    if(!d) {addNotFound.push(d); };
+                } else {
+                    console.log(response.originAddresses[0]);
+                    console.log(response.destinationAddresses[0]);
+                    let km = response.rows[0].elements[0].distance.text;
+                    distance = km.substr(0,km.indexOf(' '));
+                }
+
             } else {
                 alert('Error: ' + status);
             }
-            distance = dist.substr(0,dist.indexOf(' '));
-        });
 
+        });
 }
 
 function calculate() {
-
-    //colect table input and save to from[], to[]
-    let adds = getAdds();
+    //collect table input and save to from[], to[]
+    let rows = [], notFound = [];
+    let adds = getAdds(rows);
     let distances = []; let total = 0; let dist = 0;
     let org = adds['origs'], dst = adds['dests'];
     for(let i=0, len=org.length; i<len; i++) {
-        let temp = getDistance(org[i], dst[i], dist);
-        console.log(temp);
+        let temp = getDistance(org[i], dst[i], dist, notFound);
+        //console.log(temp);
         //console.log(dist.substr(0,dist.indexOf(' ')));
          //console.log(distance);
         //total +=  Number(dist.substr(0,dist.indexOf(' ')));
         // distances.push(distance);
     }
-    console.log(total);
+    //console.log(total);
 }
 
 window.onload = renderIndex();

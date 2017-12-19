@@ -3,62 +3,15 @@
     {
       "elements": [
         {
-          "distance": {
-            "text": "3.7 km",
-            "value": 3746
-          },
-          "duration": {
-            "text": "11 mins",
-            "value": 668
-          },
-          "status": "OK"
-        },
-        {
-          "distance": {
-            "text": "1 m",
-            "value": 0
-          },
-          "duration": {
-            "text": "1 min",
-            "value": 0
-          },
-          "status": "OK"
-        }
-      ]
-    },
-    {
-      "elements": [
-        {
-          "distance": {
-            "text": "1 m",
-            "value": 0
-          },
-          "duration": {
-            "text": "1 min",
-            "value": 0
-          },
-          "status": "OK"
-        },
-        {
-          "distance": {
-            "text": "4.1 km",
-            "value": 4106
-          },
-          "duration": {
-            "text": "12 mins",
-            "value": 704
-          },
-          "status": "OK"
+          "status": "NOT_FOUND"
         }
       ]
     }
   ],
   "originAddresses": [
-    "1990 Rue de Maricourt, Montréal, QC H4E 1V9, Canada",
-    "204-, 3177 St Jacques St, Montreal, Quebec H4C 1G7, Canada"
+    ""
   ],
   "destinationAddresses": [
-    "204-, 3177 St Jacques St, Montreal, Quebec H4C 1G7, Canada",
-    "1990 Rue de Maricourt, Montréal, QC H4E 1V9, Canada"
+    "815 Rue Bel Air, Montréal, QC H4C 1H2, Canada"
   ]
 }
