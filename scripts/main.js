@@ -8,12 +8,9 @@ const data = jsonData.sort(function (a, b) {
     return a.name.localeCompare(b.name);
 });
 
-// array to save origin and destination addresses
-// let orgArray = [];
-// let dstArray = [];
-const KEY = "&key=AIzaSyDwwjtjmR9oVWDe0JCkWb34RuZD2lvdMHs";
-const URL = "https://maps.googleapis.com/maps/api/distancematrix/json?";
-const addNotFound = [];
+const addNotFound = []; // save not found addresses
+let rslt = [];
+//let rows = []; // save rows' number
 
 // DOM objects
 const homeBtn = document.getElementById('homeBtn');
@@ -27,16 +24,16 @@ const total = document.getElementById('total');
 const office = document.getElementById('office');
 const sites = document.getElementById('sites');
 const technician = document.getElementById('technician');
-const wrongAdd = document.getElementById('wrongAdd');
+// const inconnu = document.getElementById('inconnu');
 
-// to show technicians list
+// show technicians list
 function renderIndex() {
     for (let i = 0, len = data.length; i < len; i++) {
-        updateIndex(nameList, data[i].name);
+        updateList(nameList, data[i].name);
     }
 }
 
-function updateIndex(listObj, name) {
+function updateList(listObj, name) {
     let node = document.createElement("li");
     node.textContent = name;
     listObj.appendChild(node);
@@ -52,6 +49,7 @@ function renderCalc(name) {
     makeDragDrop();
 }
 
+// Using jQuery to make list element draggable & droppable
 function makeDragDrop() {
     $('li').draggable({
         helper: "clone", revert: "invalid",
@@ -79,37 +77,41 @@ function renderUL(objDOM, data) {
     }
 }
 
+// Show unrecognized addresses
 function addValid(add) {
+    //console.log("addValid executed");
+    if(typeof addNotFound === 'undefined' || addNotFound.length < 1) {return true}
     if(addNotFound.includes(add)) {
-        updateIndex(wrongAdd, add);
+        //updateList(inconnu, add);
+        //removeAdd(add);
         return false;
     }
     return true;
 }
 
-function markAddErr(add) {
-    for(let i=0, len=allList.length; i<len; i++) {
-        if(allList[i].textContent === add ) {
-
-            console.log('list need to change');
-            //allList[i].style.border = "3px solid red";
+// Remove unrecognized address from the list
+function removeAdd(add) {
+    for(let i=0, len=sites.length; i<len; i++) {
+        if(sites[i].textContent === add ) {
+            sites.removeChild(sites.childNodes[i]);
         }
     }
 }
 
 //to retrieve table data & save to array
-function getAdds(rows) {
+function getAdds() {
     let orgArray = [], dstArray = [];
     let len = table.rows.length;
     for (let i = 1; i < len - 1; i++) {
         org = table.rows[i].cells[1].children[0].value;
         dst = table.rows[i].cells[2].children[0].value;
-
         if (org && dst) {
-            if(!addValid(org) || !addValid(dst)) { continue; }
-            orgArray.push(org);
-            dstArray.push(dst);
-            rows.push(i);
+            //console.log("running - getAdds")
+            if(addValid(org) && addValid(dst)) {
+                orgArray.push(org);
+                dstArray.push(dst);
+                //rows.push(i);
+            }
         }
     }
     return {
@@ -118,7 +120,7 @@ function getAdds(rows) {
     };
 }
 
-function getDistance(origin, destination, distance) {
+function getDistance(origin, destination, distArr, i) {
     let service = new google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
         {
@@ -129,23 +131,21 @@ function getDistance(origin, destination, distance) {
             avoidTolls: false
         }, function (response, status) {
             if (status == google.maps.DistanceMatrixStatus.OK) {
-                //let dist = response.rows[0].elements[0].distance.text;
-
-                distance = 0;
+                console.log(response);
                 let stat = response.rows[0].elements[0].status;
-
                 if(stat === 'NOT_FOUND') {
                     let o = response.originAddresses[0];
-                    let d = response.destinationAddresses[0]
-                    if(!o) {addNotFound.push(o); };
-                    if(!d) {addNotFound.push(d); };
+                    let d = response.destinationAddresses[0];
+                    if(o === "") { addNotFound.push(origin); }
+                    if(d === "") { addNotFound.push(destination); }
                 } else {
-                    console.log(response.originAddresses[0]);
-                    console.log(response.destinationAddresses[0]);
+                    //console.log(response.originAddresses[0]);
+                    //console.log(response.destinationAddresses[0]);
                     let km = response.rows[0].elements[0].distance.text;
-                    distance = km.substr(0,km.indexOf(' '));
+                    distance = +km.substr(0,km.indexOf(' '));
+                    distArr[i] = distance;
+                    console.log(`Distance is ${distance}`)
                 }
-
             } else {
                 alert('Error: ' + status);
             }
@@ -155,19 +155,20 @@ function getDistance(origin, destination, distance) {
 
 function calculate() {
     //collect table input and save to from[], to[]
-    let rows = [], notFound = [];
-    let adds = getAdds(rows);
-    let distances = []; let total = 0; let dist = 0;
+    let adds = getAdds();
+    let result = [], total = 0;
     let org = adds['origs'], dst = adds['dests'];
     for(let i=0, len=org.length; i<len; i++) {
-        let temp = getDistance(org[i], dst[i], dist, notFound);
-        //console.log(temp);
-        //console.log(dist.substr(0,dist.indexOf(' ')));
-         //console.log(distance);
-        //total +=  Number(dist.substr(0,dist.indexOf(' ')));
-        // distances.push(distance);
+        let dist = 0;
+        getDistance(org[i], dst[i], result, i);
+        console.log(result[i]);
+        if(dist > 0) {
+            console.log(`distance is ${dist}`);
+            result[i] = dist;
+            total += dist;
+        }
     }
-    //console.log(total);
+    console.log(total);
 }
 
 window.onload = renderIndex();

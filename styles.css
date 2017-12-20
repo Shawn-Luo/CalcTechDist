@@ -1,14 +1,10 @@
 h1 {color: #366691; font-size: 26px; text-shadow: 4px 10px 4px #888;}
 
-/*table {    padding-bottom: 10em;}*/
 tr td {border-bottom: 1px dotted #ddd; padding: 10px;}
 
-/*input [type=text] { line-height: 33px; }*/
-
-ul li {
+li {
     list-style-type: none;
     display: inline-block;
-    /*min-width: 220px;*/
     margin: 4px 4px;
     font-family: Georgia;
     font-size: 12px;
@@ -17,14 +13,14 @@ ul li {
     padding: 2px;
 }
 
-ul li #addNotFound {
-    background-color: firebrick;
+#inconnu {
+    background-color: orangered;
     color: white;
-    border: 2px solid orange;
+    border: 2px solid gold;
     padding: 2px;
 }
 
-.invalid { border: 3px solid red; }
+/*.invalid { border: 3px solid red; }*/
 
 button {
     color: white;

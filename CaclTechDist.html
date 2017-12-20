@@ -14,21 +14,25 @@
     <p style="margin-left:2em;">-> L'application affiche les distances plus courtes</p>
 </div>
 
-<span><button id="homeBtn">ACCEUIL</button></span>
+<span><button id="homeBtn">ACCUEIL</button></span>
 <span><button id="helpBtn">AIDE</button></span>
 <!--INDEX LIST-->
 <ul id="nameList"></ul>
 
+<!--Container-->
 <div id="calculator" style="display: none">
     <div id="sitesDiv">
         <br>
-        <p><strong>Bureau:</strong></p>
+        <p><strong>[ Bureau ]</strong></p>
+        <!--Office address-->
         <ul id="office"></ul>
-        <p><strong>Sites:</strong></p>
+        <p><strong>[ Sites ]</strong></p>
+        <!--Adress of served sites-->
         <ul id="sites"></ul>
-        <p id="wrongAdd"><strong>Sites:</strong></p>
-        <ul id="addNotFound"></ul>
+        <!--<p id="wrongAdd"><strong>[ Adresse Inconnue ]</strong></p>-->
+        <!--<ul id="inconnu"></ul>-->
     </div>
+    <!--Form for putting address-->
     <div id="formDiv">
         <h4>Technicien: <span id="technician"></span></h4>
         <FORM>
@@ -115,7 +119,7 @@
                     <td colspan="4">
                         <button id="calculate" style="background-color:forestgreen">Calculer</button>
                         <input id="reset" type="reset"  style="background:Orange; margin: 0 10px 0 10px;" value="Recommencer">
-                        <span class="sum">Total :<span id="total">99</span></span>
+                        <span class="sum">Total :<span id="total"></span></span>
                     </td>
 
                 </tr>
@@ -127,10 +131,9 @@
 </div>
 
 <footer>&copy; 2017 Ville de Montréal <br> par Xiaohui Luo</footer>
-<script src="scripts/data.js"></script>
+<script src="data/data.js"></script>
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
-<!--<script src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwwjtjmR9oVWDe0JCkWb34RuZD2lvdMHs"></script>
 <script type="text/javascript" src="scripts/main.js"></script>
 </body>
