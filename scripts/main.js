@@ -219,8 +219,12 @@ homeBtn.addEventListener('click', function () {
     nameList.style.display = "block";
 });
 
-helpBtn.addEventListener('click', () => {
-    alert('Function TO DO')
+helpBtn.addEventListener('click', (evt) => {
+    // alert('Function TO DO')
+    evt.preventDefault();
+    const help = function() {
+        (window.open("./help.html", "location=yes,resizable=yes,scrollbars=yes,status=yes"));
+    }
 });
 calcBtn.addEventListener('click', (evt) => {
     evt.preventDefault();

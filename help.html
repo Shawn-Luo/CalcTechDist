@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 id="calculatortechdistance">Calculator::Tech Distance</h1>
+
+<h2 id="features">Features</h2>
+
+<ul>
+    <li>This little application using Google Maps Distance Matrix to get drving distances between two points</li>
+
+    <li>Click Technician's name as an indexed link</li>
+
+    <li>Then Choose the address by drag and drop</li>
+
+    <li>Click the <code>Calculer</code> button to get the distances
+
+
+        <ul>
+            <li>Click <code>Recommencer</code> for enter new address if you want to calculate more for the same technician</li></ul>
+    </li>
+
+    <li>Click the <code>Acceuil</code> button at the top to return to the index  </li>
+</ul>
+
+<h2 id="environnement">Environnement</h2>
+
+<ul>
+    <li>Fureteur support JavaScript 2015 (<strong>ES6, ECMAScript 2015</strong>)
+
+
+        <ul>
+            <li>Chrome</li>
+
+            <li>Firefox</li>
+
+            <li>Edge</li></ul>
+    </li>
+
+    <li><strong>Optional</strong> getting a Google Maps API Key </li>
+</ul>
+
+<h3 id="getagooglemapsapikey">Get a Google Maps API key</h3>
+
+<ul>
+    <li>Why: Without an API key, you will reach the limit quite soon</li>
+
+    <li>How:
+
+
+        <ul>
+            <li>log into to your google account</li>
+
+            <li>following the instructions to get a key
+
+
+                <ul>
+                    <li><a href="https://developers.google.com/maps/documentation/distance-matrix/start#get-a-key">Official Link</a></li></ul>
+            </li>
+
+            <li>add the key to the <code>index.html</code> file
+
+
+                <ul>
+                    <li>at the fourth last line, add the key after <code>key=</code>
+                        <code>&lt;script src="https://maps.googleapis.com/maps/api/js?key="&gt;&lt;/script&gt;</code></li></ul>
+            </li></ul>
+    </li>
+</ul>
+
+<h3 id="googlemapsdistancematrixapiusagelimits">Google Maps Distance Matrix API Usage Limits</h3>
+
+<ul>
+    <li><a href="https://developers.google.com/maps/documentation/distance-matrix/usage-limits">Official Link</a></li>
+
+    <li>2,500 free elements per day</li>
+
+    <li>25 origins or 25 destinations per request</li>
+
+    <li>100 elements per request &amp; per second</li>
+</ul>
+
+<h2 id="data">Data</h2>
+
+<ul>
+    <li>Currently, data file saved at local <code>/data/data.js</code>, as JSON array.</li>
+
+    <li>Useful links
+
+
+        <ul>
+            <li><a href="https://www.json.org/">introducing JSON</a></li>
+
+            <li><a href="https://jsonformatter.curiousconcept.com/">JSON Formatter</a> </li></ul>
+    </li>
+</ul>
+</body>
+</html>
+
