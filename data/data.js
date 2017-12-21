@@ -8,7 +8,7 @@ const jsonData =
             ],
             "sites": [
                 "525 rue Dominion",
-                "1055 rue D'Hibernia 1212, Drummond",
+                "1055 rue D'Hibernia, Drummond",
                 "1255 rue de la sucrerie",
                 "1445 rue St-Mathieu",
                 "1990 rue de Maricourt",

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Calculator::Tech Distance par Xiaohui Luo</title>
     <link type="text/css" rel="stylesheet" href="styles.css">
+    <link rel="icon"
+          type="image/png"
+          href="img/VdM.png">
 </head>
 <body>
 <h1>Calculatrice::Tech.Distance</h1>
@@ -29,8 +32,8 @@
         <p><strong>[ Sites ]</strong></p>
         <!--Adress of served sites-->
         <ul id="sites"></ul>
-        <!--<p id="wrongAdd"><strong>[ Adresse Inconnue ]</strong></p>-->
-        <!--<ul id="inconnu"></ul>-->
+        <p id="wrongAdd"><strong>[ Adresse Inconnue ]</strong></p>
+        <ul class='error' id="unkown"></ul>
     </div>
     <!--Form for putting address-->
     <div id="formDiv">
@@ -45,89 +48,88 @@
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>6</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>7</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>8</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>9</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>10</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>11</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td>12</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class='adds'><input type="text"/></td>
+                    <td class="rslt"></td>
                 </tr>
                 <tr>
                     <td colspan="4">
                         <button id="calculate" style="background-color:forestgreen">Calculer</button>
-                        <input id="reset" type="reset"  style="background:Orange; margin: 0 10px 0 10px;" value="Recommencer">
-                        <span class="sum">Total :<span id="total"></span></span>
+                        <input id="reset" type="reset" style="background:Orange; margin: 0 10px 0 10px;"
+                               value="Recommencer">
+                        <span class="sum">Total : <span id="total">0</span><span> km</span></span>
                     </td>
-
                 </tr>
             </table>
             <br>
         </FORM>
     </div>
-
 </div>
 
 <footer>&copy; 2017 Ville de Montréal <br> par Xiaohui Luo</footer>

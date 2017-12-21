@@ -13,11 +13,12 @@ li {
     padding: 2px;
 }
 
-#inconnu {
+.rslt { font: bold 14px/30px Georgia, serif; color: dodgerblue; }
+
+.error li {
     background-color: orangered;
     color: white;
-    border: 2px solid gold;
-    padding: 2px;
+    border: 1px solid gold;
 }
 
 /*.invalid { border: 3px solid red; }*/
@@ -56,12 +57,6 @@ button {
     display: inherit;
 }
 
-
-/*div.container {*/
-/*width: 100%;*/
-/*border: 1px solid gray;*/
-/*}*/
-
 footer {
     padding: 0.4em;
     color: white;
@@ -70,8 +65,7 @@ footer {
     text-align: center;
 }
 
-.sum {font: bold 20px "new century schoolbook", serif; color: Chocolate; margin: 0 30px 0 30px; }
-
+.sum {font: bold 20px/30px "new century schoolbook", serif; color: Chocolate; margin: 0 30px 0 30px; }
 
 
 /*.indent {margin-left:4em;}*/

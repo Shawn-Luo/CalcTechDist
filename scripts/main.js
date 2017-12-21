@@ -9,8 +9,6 @@ const data = jsonData.sort(function (a, b) {
 });
 
 const addNotFound = []; // save not found addresses
-let rslt = [];
-//let rows = []; // save rows' number
 
 // DOM objects
 const homeBtn = document.getElementById('homeBtn');
@@ -20,10 +18,12 @@ const nameList = document.getElementById('nameList');
 const intro = document.getElementById('intro');
 const calculator = document.getElementById('calculator');
 const table = document.querySelector('table');
-const total = document.getElementById('total');
+const totalElm = document.getElementById('total');
 const office = document.getElementById('office');
 const sites = document.getElementById('sites');
 const technician = document.getElementById('technician');
+const unkown = document.getElementById('unkown');
+
 // const inconnu = document.getElementById('inconnu');
 
 // show technicians list
@@ -58,7 +58,7 @@ function makeDragDrop() {
         },
         cursorAt: {left: 40, top: 25}
     });
-    $('td').droppable({
+    $('.adds').droppable({
         drop: function (e, ui) {
             $(this).find("input").val($(ui.draggable).text());
         }
@@ -79,48 +79,58 @@ function renderUL(objDOM, data) {
 
 // Show unrecognized addresses
 function addValid(add) {
-    //console.log("addValid executed");
-    if(typeof addNotFound === 'undefined' || addNotFound.length < 1) {return true}
-    if(addNotFound.includes(add)) {
+    if (typeof addNotFound === 'undefined' || addNotFound.length < 1) {
+        return true
+    }
+    if (addNotFound.includes(add)) {
         //updateList(inconnu, add);
-        //removeAdd(add);
+        //addRed();
         return false;
     }
     return true;
 }
 
 // Remove unrecognized address from the list
-function removeAdd(add) {
-    for(let i=0, len=sites.length; i<len; i++) {
-        if(sites[i].textContent === add ) {
-            sites.removeChild(sites.childNodes[i]);
-        }
-    }
-}
+// function removeAdd(add) {
+//     for(let i=0, len=sites.length; i<len; i++) {
+//         if(sites[i].textContent === add ) {
+//             sites.removeChild(sites.childNodes[i]);
+//         }
+//     }
+// }
 
 //to retrieve table data & save to array
 function getAdds() {
-    let orgArray = [], dstArray = [];
+    let orgArray = [], dstArray = [], numRows = [];
     let len = table.rows.length;
     for (let i = 1; i < len - 1; i++) {
         org = table.rows[i].cells[1].children[0].value;
         dst = table.rows[i].cells[2].children[0].value;
         if (org && dst) {
-            //console.log("running - getAdds")
-            if(addValid(org) && addValid(dst)) {
+            if (addValid(org, i) && addValid(dst, i)) {
                 orgArray.push(org);
                 dstArray.push(dst);
-                //rows.push(i);
+                numRows.push(i);
             }
         }
     }
     return {
         origs: orgArray,
-        dests: dstArray
+        dests: dstArray,
+        numRow: numRows,
     };
 }
 
-function getDistance(origin, destination, distArr, i) {
+
+function calculate() {
+    let adds = getAdds();
+    let org = adds['origs'], dst = adds['dests'], numRow = adds['numRow'];
+    for (let i = 0, len = org.length; i < len; i++) {
+        getDistance(org[i], dst[i], numRow[i]);
+    }
+}
+
+function getDistance(origin, destination, numRow) {
     let service = new google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
         {
@@ -131,20 +141,44 @@ function getDistance(origin, destination, distArr, i) {
             avoidTolls: false
         }, function (response, status) {
             if (status == google.maps.DistanceMatrixStatus.OK) {
-                console.log(response);
                 let stat = response.rows[0].elements[0].status;
-                if(stat === 'NOT_FOUND') {
+                if (stat === 'NOT_FOUND') {
                     let o = response.originAddresses[0];
                     let d = response.destinationAddresses[0];
-                    if(o === "") { addNotFound.push(origin); }
-                    if(d === "") { addNotFound.push(destination); }
+                    if (o === "") {
+                        addRed(table.rows[numRow].cells[1]);
+                        updateList(unkown, origin);
+                        addNotFound.push(origin);
+                    }
+                    if (d === "") {
+                        addRed(table.rows[numRow].cells[2]);
+                        updateList(unkown, destination);
+                        addNotFound.push(destination);
+                    }
+                    table.rows[numRow].cells[3].textContent = "?";
                 } else {
-                    //console.log(response.originAddresses[0]);
-                    //console.log(response.destinationAddresses[0]);
+
+                    removeRed(table.rows[numRow].cells[0]);
+                    removeRed(table.rows[numRow].cells[1]);
+
+                    // show distance at table
                     let km = response.rows[0].elements[0].distance.text;
-                    distance = +km.substr(0,km.indexOf(' '));
-                    distArr[i] = distance;
-                    console.log(`Distance is ${distance}`)
+                    table.rows[numRow].cells[3].textContent = km;
+
+                    // update total value
+                    let currDist = 0, sum = 0;
+
+                    if (km.length > 0) {
+                        currDist = parseFloat(km);
+                        sum += currDist;
+                    }
+
+                    if (totalElm.textContent != '0') {
+                        sum += parseFloat(totalElm.textContent);
+                    }
+
+                    totalElm.textContent = sum;
+
                 }
             } else {
                 alert('Error: ' + status);
@@ -153,22 +187,18 @@ function getDistance(origin, destination, distArr, i) {
         });
 }
 
-function calculate() {
-    //collect table input and save to from[], to[]
-    let adds = getAdds();
-    let result = [], total = 0;
-    let org = adds['origs'], dst = adds['dests'];
-    for(let i=0, len=org.length; i<len; i++) {
-        let dist = 0;
-        getDistance(org[i], dst[i], result, i);
-        console.log(result[i]);
-        if(dist > 0) {
-            console.log(`distance is ${dist}`);
-            result[i] = dist;
-            total += dist;
-        }
+// Enlever le classe en affichant le champs en rouge
+function removeRed(elm) {
+    if (elm.classList.contains('error')) {
+        elm.classList.remove('error')
     }
-    console.log(total);
+}
+
+// Enlever le classe en affichant le champs en rouge
+function addRed(elm) {
+    if (!elm.classList.contains('error')) {
+        elm.classList.toggle('error')
+    }
 }
 
 window.onload = renderIndex();
@@ -197,5 +227,11 @@ calcBtn.addEventListener('click', (evt) => {
     calculate();
 });
 document.getElementById('reset').addEventListener('click', function () {
-    total.textContent = ''
+    for (let i = 1, len = table.rows.length; i < len; i++) {
+        let elm = table.rows[i].cells[3];
+        if (elm) {
+            elm.textContent = '';
+        }
+    }
+    totalElm.textContent = 0;
 });
